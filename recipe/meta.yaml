@@ -59,7 +59,7 @@ about:
 
 extra:
   recipe-maintainers:
-    - conda-forge/r
+    - ianaobi
 
 # Package: waldo
 # Title: Find Differences Between R Objects
