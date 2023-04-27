@@ -27,20 +27,20 @@ requirements:
   host:
     - r-base {{ r_base }}
     - r-cli
-    - r-diffobj >=0.3.4
+    - r-diffobj 
     - r-fansi
     - r-glue
     - r-rematch2
-    - r-rlang >=1.0.0
+    - r-rlang 
     - r-tibble
   run:
     - r-base {{ r_base }}
     - r-cli
-    - r-diffobj >=0.3.4
+    - r-diffobj 
     - r-fansi
     - r-glue
     - r-rematch2
-    - r-rlang >=1.0.0
+    - r-rlang
     - r-tibble
 
 test:
