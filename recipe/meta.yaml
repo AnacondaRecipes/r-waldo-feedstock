@@ -60,6 +60,7 @@ about:
 extra:
   recipe-maintainers:
     - ianaobi
+    - bradley
 
 # Package: waldo
 # Title: Find Differences Between R Objects
