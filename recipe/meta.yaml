@@ -15,32 +15,38 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 1
-  noarch: generic
+  # Only building r packages for win64, linux64, osx64
+  skip: True # [aarch64 or s390x or ppc64le or arm64]
+
   rpaths:
     - lib/R/lib/
     - lib/
+
+  # weird error on windows
+  missing_dso_whitelist:
+    - $RPATH/R.dll  # [win]
 
 requirements:
   build:
     - {{ posix }}zip               # [win]
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
-    - r-base {{ r_base }}
+    - r-base {{ r_version }}
     - r-cli
     - r-diffobj 
     - r-fansi
     - r-glue
     - r-rematch2
-    - r-rlang 
+    - r-rlang >=1.0.0
     - r-tibble
   run:
-    - r-base {{ r_base }}
+    - r-base {{ r_version }}
     - r-cli
     - r-diffobj 
     - r-fansi
     - r-glue
     - r-rematch2
-    - r-rlang
+    - r-rlang >=1.0.0
     - r-tibble
 
 test:
@@ -58,8 +64,22 @@ about:
     - LICENSE
 
 extra:
-  recipe-maintainers:
-    - ianaobi
+  skip-lints:
+    # These are needed because of bug: https://github.com/anaconda-distribution/anaconda-linter/issues/197
+    - http_url
+    - invalid_url
+
+    - host_section_needs_exact_pinnings
+    - missing_dev_url
+    - missing_description
+    - missing_documentation
+
+  anaconda-services:
+    ref:  https://anaconda.zendesk.com/agent/tickets/35116
+    reason: "needed for r-devtools"
+    recipe-maintainers:
+      - bkreider
+      - ianaobi
 
 # Package: waldo
 # Title: Find Differences Between R Objects
